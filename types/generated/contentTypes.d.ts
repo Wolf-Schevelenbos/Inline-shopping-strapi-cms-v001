@@ -362,28 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiTestTest extends Schema.CollectionType {
-  collectionName: 'tests';
-  info: {
-    singularName: 'test';
-    pluralName: 'tests';
-    displayName: 'Test';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    test123: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::test.test', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::test.test', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -810,6 +788,298 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiBasketBasket extends Schema.CollectionType {
+  collectionName: 'baskets';
+  info: {
+    singularName: 'basket';
+    pluralName: 'baskets';
+    displayName: 'Basket';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    store: Attribute.Relation<
+      'api::basket.basket',
+      'oneToOne',
+      'api::store.store'
+    >;
+    user: Attribute.Relation<
+      'api::basket.basket',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::basket.basket',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::basket.basket',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCoordinateCoordinate extends Schema.CollectionType {
+  collectionName: 'coordinates';
+  info: {
+    singularName: 'coordinate';
+    pluralName: 'coordinates';
+    displayName: 'Coordinate';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    relativeX: Attribute.BigInteger & Attribute.Required;
+    relativeY: Attribute.BigInteger & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::coordinate.coordinate',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::coordinate.coordinate',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiItemItem extends Schema.CollectionType {
+  collectionName: 'items';
+  info: {
+    singularName: 'item';
+    pluralName: 'items';
+    displayName: 'Item';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    description: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::item.item', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::item.item', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiStoreStore extends Schema.CollectionType {
+  collectionName: 'stores';
+  info: {
+    singularName: 'store';
+    pluralName: 'stores';
+    displayName: 'Store';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 2;
+      }>;
+    longitude: Attribute.Float & Attribute.Required;
+    latitude: Attribute.Float & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::store.store',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::store.store',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiStoreBasketItemStoreBasketItem
+  extends Schema.CollectionType {
+  collectionName: 'store_basket_items';
+  info: {
+    singularName: 'store-basket-item';
+    pluralName: 'store-basket-items';
+    displayName: 'StoreBasketItem';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    basket: Attribute.Relation<
+      'api::store-basket-item.store-basket-item',
+      'oneToOne',
+      'api::basket.basket'
+    >;
+    store: Attribute.Relation<
+      'api::store-basket-item.store-basket-item',
+      'oneToOne',
+      'api::store.store'
+    >;
+    amount: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      > &
+      Attribute.DefaultTo<1>;
+    isCollected: Attribute.Boolean & Attribute.DefaultTo<false>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::store-basket-item.store-basket-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::store-basket-item.store-basket-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiStoreItemStoreItem extends Schema.CollectionType {
+  collectionName: 'store_items';
+  info: {
+    singularName: 'store-item';
+    pluralName: 'store-items';
+    displayName: 'StoreItem';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    item: Attribute.Relation<
+      'api::store-item.store-item',
+      'oneToOne',
+      'api::item.item'
+    >;
+    store: Attribute.Relation<
+      'api::store-item.store-item',
+      'oneToOne',
+      'api::store.store'
+    >;
+    storeLocation: Attribute.Relation<
+      'api::store-item.store-item',
+      'oneToOne',
+      'api::coordinate.coordinate'
+    >;
+    stockAmount: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Attribute.DefaultTo<0>;
+    barcode: Attribute.String & Attribute.Required;
+    price: Attribute.Decimal &
+      Attribute.Required &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::store-item.store-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::store-item.store-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiStoreObstacleStoreObstacle extends Schema.CollectionType {
+  collectionName: 'store_obstacles';
+  info: {
+    singularName: 'store-obstacle';
+    pluralName: 'store-obstacles';
+    displayName: 'StoreObstacle';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    store: Attribute.Relation<
+      'api::store-obstacle.store-obstacle',
+      'oneToOne',
+      'api::store.store'
+    >;
+    topLeftCoordinate: Attribute.Relation<
+      'api::store-obstacle.store-obstacle',
+      'oneToOne',
+      'api::coordinate.coordinate'
+    >;
+    topRightCoordinate: Attribute.Relation<
+      'api::store-obstacle.store-obstacle',
+      'oneToOne',
+      'api::coordinate.coordinate'
+    >;
+    bottomLeftCoordinate: Attribute.Relation<
+      'api::store-obstacle.store-obstacle',
+      'oneToOne',
+      'api::coordinate.coordinate'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::store-obstacle.store-obstacle',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::store-obstacle.store-obstacle',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -820,7 +1090,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::test.test': ApiTestTest;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -829,6 +1098,13 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::basket.basket': ApiBasketBasket;
+      'api::coordinate.coordinate': ApiCoordinateCoordinate;
+      'api::item.item': ApiItemItem;
+      'api::store.store': ApiStoreStore;
+      'api::store-basket-item.store-basket-item': ApiStoreBasketItemStoreBasketItem;
+      'api::store-item.store-item': ApiStoreItemStoreItem;
+      'api::store-obstacle.store-obstacle': ApiStoreObstacleStoreObstacle;
     }
   }
 }

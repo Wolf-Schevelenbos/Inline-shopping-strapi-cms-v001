@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "coordinates",
+  "info": {
+    "singularName": "coordinate",
+    "pluralName": "coordinates",
+    "displayName": "Coordinate"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "relativeX": {
+      "type": "biginteger",
+      "required": true
+    },
+    "relativeY": {
+      "type": "biginteger",
+      "required": true
+    }
+  }
+}
