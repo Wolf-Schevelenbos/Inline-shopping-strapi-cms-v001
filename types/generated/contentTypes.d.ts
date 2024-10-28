@@ -1031,6 +1031,41 @@ export interface ApiStoreItemStoreItem extends Schema.CollectionType {
   };
 }
 
+export interface ApiStoreLayoutStoreLayout extends Schema.CollectionType {
+  collectionName: 'store_layouts';
+  info: {
+    singularName: 'store-layout';
+    pluralName: 'store-layouts';
+    displayName: 'StoreLayout';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    store: Attribute.Relation<
+      'api::store-layout.store-layout',
+      'oneToOne',
+      'api::store.store'
+    >;
+    Points: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::store-layout.store-layout',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::store-layout.store-layout',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiStoreObstacleStoreObstacle extends Schema.CollectionType {
   collectionName: 'store_obstacles';
   info: {
@@ -1104,6 +1139,7 @@ declare module '@strapi/types' {
       'api::store.store': ApiStoreStore;
       'api::store-basket-item.store-basket-item': ApiStoreBasketItemStoreBasketItem;
       'api::store-item.store-item': ApiStoreItemStoreItem;
+      'api::store-layout.store-layout': ApiStoreLayoutStoreLayout;
       'api::store-obstacle.store-obstacle': ApiStoreObstacleStoreObstacle;
     }
   }
