@@ -4,32 +4,21 @@
   "info": {
     "singularName": "store-obstacle",
     "pluralName": "store-obstacles",
-    "displayName": "StoreObstacle"
+    "displayName": "StoreObstacle",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "store": {
+    "store_layout": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::store.store"
+      "target": "api::store-layout.store-layout"
     },
-    "topLeftCoordinate": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::coordinate.coordinate"
-    },
-    "topRightCoordinate": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::coordinate.coordinate"
-    },
-    "bottomLeftCoordinate": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::coordinate.coordinate"
+    "Points": {
+      "type": "json"
     }
   }
 }

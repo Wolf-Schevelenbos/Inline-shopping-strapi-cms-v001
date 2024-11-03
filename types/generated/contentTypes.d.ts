@@ -901,6 +901,11 @@ export interface ApiStoreStore extends Schema.CollectionType {
       }>;
     longitude: Attribute.Float & Attribute.Required;
     latitude: Attribute.Float & Attribute.Required;
+    store_layout: Attribute.Relation<
+      'api::store.store',
+      'oneToOne',
+      'api::store-layout.store-layout'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1037,6 +1042,7 @@ export interface ApiStoreLayoutStoreLayout extends Schema.CollectionType {
     singularName: 'store-layout';
     pluralName: 'store-layouts';
     displayName: 'StoreLayout';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1072,31 +1078,18 @@ export interface ApiStoreObstacleStoreObstacle extends Schema.CollectionType {
     singularName: 'store-obstacle';
     pluralName: 'store-obstacles';
     displayName: 'StoreObstacle';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    store: Attribute.Relation<
+    store_layout: Attribute.Relation<
       'api::store-obstacle.store-obstacle',
       'oneToOne',
-      'api::store.store'
+      'api::store-layout.store-layout'
     >;
-    topLeftCoordinate: Attribute.Relation<
-      'api::store-obstacle.store-obstacle',
-      'oneToOne',
-      'api::coordinate.coordinate'
-    >;
-    topRightCoordinate: Attribute.Relation<
-      'api::store-obstacle.store-obstacle',
-      'oneToOne',
-      'api::coordinate.coordinate'
-    >;
-    bottomLeftCoordinate: Attribute.Relation<
-      'api::store-obstacle.store-obstacle',
-      'oneToOne',
-      'api::coordinate.coordinate'
-    >;
+    Points: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
