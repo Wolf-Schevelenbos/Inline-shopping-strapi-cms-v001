@@ -4,7 +4,8 @@
   "info": {
     "singularName": "store-item",
     "pluralName": "store-items",
-    "displayName": "StoreItem"
+    "displayName": "StoreItem",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -21,11 +22,6 @@
       "relation": "oneToOne",
       "target": "api::store.store"
     },
-    "storeLocation": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::coordinate.coordinate"
-    },
     "stockAmount": {
       "type": "integer",
       "required": true,
@@ -40,6 +36,9 @@
       "type": "decimal",
       "required": true,
       "min": 0
+    },
+    "storeLocation": {
+      "type": "json"
     }
   }
 }

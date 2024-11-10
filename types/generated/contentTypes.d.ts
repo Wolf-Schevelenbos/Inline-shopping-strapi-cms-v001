@@ -980,6 +980,7 @@ export interface ApiStoreItemStoreItem extends Schema.CollectionType {
     singularName: 'store-item';
     pluralName: 'store-items';
     displayName: 'StoreItem';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -994,11 +995,6 @@ export interface ApiStoreItemStoreItem extends Schema.CollectionType {
       'api::store-item.store-item',
       'oneToOne',
       'api::store.store'
-    >;
-    storeLocation: Attribute.Relation<
-      'api::store-item.store-item',
-      'oneToOne',
-      'api::coordinate.coordinate'
     >;
     stockAmount: Attribute.Integer &
       Attribute.Required &
@@ -1018,6 +1014,7 @@ export interface ApiStoreItemStoreItem extends Schema.CollectionType {
         },
         number
       >;
+    storeLocation: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
