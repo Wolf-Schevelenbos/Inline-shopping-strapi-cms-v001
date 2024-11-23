@@ -12,11 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "store_layout": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::store-layout.store-layout"
-    },
     "Points": {
       "type": "json"
     }

@@ -37,8 +37,10 @@
       "required": true,
       "min": 0
     },
-    "storeLocation": {
-      "type": "json"
+    "coordinate": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::coordinate.coordinate"
     }
   }
 }

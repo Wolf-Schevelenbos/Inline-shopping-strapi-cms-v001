@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "store_layout_points",
+  "info": {
+    "singularName": "store-layout-point",
+    "pluralName": "store-layout-points",
+    "displayName": "StoreLayoutPoint"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "coordinate": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::coordinate.coordinate"
+    },
+    "store": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::store.store"
+    }
+  }
+}
