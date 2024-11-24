@@ -969,6 +969,86 @@ export interface ApiStoreBasketItemStoreBasketItem
   };
 }
 
+export interface ApiStoreCheckoutPointStoreCheckoutPoint
+  extends Schema.CollectionType {
+  collectionName: 'store_checkout_points';
+  info: {
+    singularName: 'store-checkout-point';
+    pluralName: 'store-checkout-points';
+    displayName: 'StoreCheckoutPoint';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    coordinate: Attribute.Relation<
+      'api::store-checkout-point.store-checkout-point',
+      'oneToOne',
+      'api::coordinate.coordinate'
+    >;
+    store: Attribute.Relation<
+      'api::store-checkout-point.store-checkout-point',
+      'oneToOne',
+      'api::store.store'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::store-checkout-point.store-checkout-point',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::store-checkout-point.store-checkout-point',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiStoreEntrancePointStoreEntrancePoint
+  extends Schema.CollectionType {
+  collectionName: 'store_entrance_points';
+  info: {
+    singularName: 'store-entrance-point';
+    pluralName: 'store-entrance-points';
+    displayName: 'StoreEntrancePoint';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    coordinate: Attribute.Relation<
+      'api::store-entrance-point.store-entrance-point',
+      'oneToOne',
+      'api::coordinate.coordinate'
+    >;
+    store: Attribute.Relation<
+      'api::store-entrance-point.store-entrance-point',
+      'oneToOne',
+      'api::store.store'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::store-entrance-point.store-entrance-point',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::store-entrance-point.store-entrance-point',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiStoreItemStoreItem extends Schema.CollectionType {
   collectionName: 'store_items';
   info: {
@@ -1126,6 +1206,8 @@ declare module '@strapi/types' {
       'api::item.item': ApiItemItem;
       'api::store.store': ApiStoreStore;
       'api::store-basket-item.store-basket-item': ApiStoreBasketItemStoreBasketItem;
+      'api::store-checkout-point.store-checkout-point': ApiStoreCheckoutPointStoreCheckoutPoint;
+      'api::store-entrance-point.store-entrance-point': ApiStoreEntrancePointStoreEntrancePoint;
       'api::store-item.store-item': ApiStoreItemStoreItem;
       'api::store-layout-point.store-layout-point': ApiStoreLayoutPointStoreLayoutPoint;
       'api::store-obstacle.store-obstacle': ApiStoreObstacleStoreObstacle;

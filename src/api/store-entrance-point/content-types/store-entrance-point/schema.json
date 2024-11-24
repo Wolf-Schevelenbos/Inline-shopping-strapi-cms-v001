@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "store_entrance_points",
+  "info": {
+    "singularName": "store-entrance-point",
+    "pluralName": "store-entrance-points",
+    "displayName": "StoreEntrancePoint"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "coordinate": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::coordinate.coordinate"
+    },
+    "store": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::store.store"
+    }
+  }
+}

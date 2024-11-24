@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "store_checkout_points",
+  "info": {
+    "singularName": "store-checkout-point",
+    "pluralName": "store-checkout-points",
+    "displayName": "StoreCheckoutPoint"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "coordinate": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::coordinate.coordinate"
+    },
+    "store": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::store.store"
+    }
+  }
+}
