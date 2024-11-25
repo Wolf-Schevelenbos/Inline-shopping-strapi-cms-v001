@@ -4,7 +4,8 @@
   "info": {
     "singularName": "store-basket-item",
     "pluralName": "store-basket-items",
-    "displayName": "StoreBasketItem"
+    "displayName": "StoreBasketItem",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,11 +17,6 @@
       "relation": "oneToOne",
       "target": "api::basket.basket"
     },
-    "store": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::store.store"
-    },
     "amount": {
       "type": "integer",
       "required": true,
@@ -30,6 +26,11 @@
     "isCollected": {
       "type": "boolean",
       "default": false
+    },
+    "store_item": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::store-item.store-item"
     }
   }
 }

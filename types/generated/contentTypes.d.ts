@@ -926,6 +926,7 @@ export interface ApiStoreBasketItemStoreBasketItem
     singularName: 'store-basket-item';
     pluralName: 'store-basket-items';
     displayName: 'StoreBasketItem';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -935,11 +936,6 @@ export interface ApiStoreBasketItemStoreBasketItem
       'api::store-basket-item.store-basket-item',
       'oneToOne',
       'api::basket.basket'
-    >;
-    store: Attribute.Relation<
-      'api::store-basket-item.store-basket-item',
-      'oneToOne',
-      'api::store.store'
     >;
     amount: Attribute.Integer &
       Attribute.Required &
@@ -951,6 +947,11 @@ export interface ApiStoreBasketItemStoreBasketItem
       > &
       Attribute.DefaultTo<1>;
     isCollected: Attribute.Boolean & Attribute.DefaultTo<false>;
+    store_item: Attribute.Relation<
+      'api::store-basket-item.store-basket-item',
+      'oneToOne',
+      'api::store-item.store-item'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
