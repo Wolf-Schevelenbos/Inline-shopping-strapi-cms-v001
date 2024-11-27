@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "store_obstacle_points",
+  "info": {
+    "singularName": "store-obstacle-point",
+    "pluralName": "store-obstacle-points",
+    "displayName": "StoreObstaclePoint"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "store_obstacle": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::store-obstacle.store-obstacle"
+    },
+    "coordinate": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::coordinate.coordinate"
+    }
+  }
+}

@@ -1165,7 +1165,11 @@ export interface ApiStoreObstacleStoreObstacle extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    Points: Attribute.JSON;
+    store: Attribute.Relation<
+      'api::store-obstacle.store-obstacle',
+      'oneToOne',
+      'api::store.store'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1177,6 +1181,46 @@ export interface ApiStoreObstacleStoreObstacle extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::store-obstacle.store-obstacle',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiStoreObstaclePointStoreObstaclePoint
+  extends Schema.CollectionType {
+  collectionName: 'store_obstacle_points';
+  info: {
+    singularName: 'store-obstacle-point';
+    pluralName: 'store-obstacle-points';
+    displayName: 'StoreObstaclePoint';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    store_obstacle: Attribute.Relation<
+      'api::store-obstacle-point.store-obstacle-point',
+      'oneToOne',
+      'api::store-obstacle.store-obstacle'
+    >;
+    coordinate: Attribute.Relation<
+      'api::store-obstacle-point.store-obstacle-point',
+      'oneToOne',
+      'api::coordinate.coordinate'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::store-obstacle-point.store-obstacle-point',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::store-obstacle-point.store-obstacle-point',
       'oneToOne',
       'admin::user'
     > &
@@ -1212,6 +1256,7 @@ declare module '@strapi/types' {
       'api::store-item.store-item': ApiStoreItemStoreItem;
       'api::store-layout-point.store-layout-point': ApiStoreLayoutPointStoreLayoutPoint;
       'api::store-obstacle.store-obstacle': ApiStoreObstacleStoreObstacle;
+      'api::store-obstacle-point.store-obstacle-point': ApiStoreObstaclePointStoreObstaclePoint;
     }
   }
 }
