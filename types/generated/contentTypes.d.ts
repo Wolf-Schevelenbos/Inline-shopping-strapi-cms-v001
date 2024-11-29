@@ -901,11 +901,6 @@ export interface ApiStoreStore extends Schema.CollectionType {
       }>;
     longitude: Attribute.Float & Attribute.Required;
     latitude: Attribute.Float & Attribute.Required;
-    store_layout: Attribute.Relation<
-      'api::store.store',
-      'oneToOne',
-      'api::store-layout.store-layout'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -931,6 +926,7 @@ export interface ApiStoreBasketItemStoreBasketItem
     singularName: 'store-basket-item';
     pluralName: 'store-basket-items';
     displayName: 'StoreBasketItem';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -940,11 +936,6 @@ export interface ApiStoreBasketItemStoreBasketItem
       'api::store-basket-item.store-basket-item',
       'oneToOne',
       'api::basket.basket'
-    >;
-    store: Attribute.Relation<
-      'api::store-basket-item.store-basket-item',
-      'oneToOne',
-      'api::store.store'
     >;
     amount: Attribute.Integer &
       Attribute.Required &
@@ -956,6 +947,11 @@ export interface ApiStoreBasketItemStoreBasketItem
       > &
       Attribute.DefaultTo<1>;
     isCollected: Attribute.Boolean & Attribute.DefaultTo<false>;
+    store_item: Attribute.Relation<
+      'api::store-basket-item.store-basket-item',
+      'oneToOne',
+      'api::store-item.store-item'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -967,6 +963,86 @@ export interface ApiStoreBasketItemStoreBasketItem
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::store-basket-item.store-basket-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiStoreCheckoutPointStoreCheckoutPoint
+  extends Schema.CollectionType {
+  collectionName: 'store_checkout_points';
+  info: {
+    singularName: 'store-checkout-point';
+    pluralName: 'store-checkout-points';
+    displayName: 'StoreCheckoutPoint';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    coordinate: Attribute.Relation<
+      'api::store-checkout-point.store-checkout-point',
+      'oneToOne',
+      'api::coordinate.coordinate'
+    >;
+    store: Attribute.Relation<
+      'api::store-checkout-point.store-checkout-point',
+      'oneToOne',
+      'api::store.store'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::store-checkout-point.store-checkout-point',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::store-checkout-point.store-checkout-point',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiStoreEntrancePointStoreEntrancePoint
+  extends Schema.CollectionType {
+  collectionName: 'store_entrance_points';
+  info: {
+    singularName: 'store-entrance-point';
+    pluralName: 'store-entrance-points';
+    displayName: 'StoreEntrancePoint';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    coordinate: Attribute.Relation<
+      'api::store-entrance-point.store-entrance-point',
+      'oneToOne',
+      'api::coordinate.coordinate'
+    >;
+    store: Attribute.Relation<
+      'api::store-entrance-point.store-entrance-point',
+      'oneToOne',
+      'api::store.store'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::store-entrance-point.store-entrance-point',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::store-entrance-point.store-entrance-point',
       'oneToOne',
       'admin::user'
     > &
@@ -1014,7 +1090,11 @@ export interface ApiStoreItemStoreItem extends Schema.CollectionType {
         },
         number
       >;
-    storeLocation: Attribute.JSON;
+    coordinate: Attribute.Relation<
+      'api::store-item.store-item',
+      'oneToOne',
+      'api::coordinate.coordinate'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1033,35 +1113,39 @@ export interface ApiStoreItemStoreItem extends Schema.CollectionType {
   };
 }
 
-export interface ApiStoreLayoutStoreLayout extends Schema.CollectionType {
-  collectionName: 'store_layouts';
+export interface ApiStoreLayoutPointStoreLayoutPoint
+  extends Schema.CollectionType {
+  collectionName: 'store_layout_points';
   info: {
-    singularName: 'store-layout';
-    pluralName: 'store-layouts';
-    displayName: 'StoreLayout';
-    description: '';
+    singularName: 'store-layout-point';
+    pluralName: 'store-layout-points';
+    displayName: 'StoreLayoutPoint';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
+    coordinate: Attribute.Relation<
+      'api::store-layout-point.store-layout-point',
+      'oneToOne',
+      'api::coordinate.coordinate'
+    >;
     store: Attribute.Relation<
-      'api::store-layout.store-layout',
+      'api::store-layout-point.store-layout-point',
       'oneToOne',
       'api::store.store'
     >;
-    Points: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::store-layout.store-layout',
+      'api::store-layout-point.store-layout-point',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::store-layout.store-layout',
+      'api::store-layout-point.store-layout-point',
       'oneToOne',
       'admin::user'
     > &
@@ -1081,12 +1165,11 @@ export interface ApiStoreObstacleStoreObstacle extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    store_layout: Attribute.Relation<
+    store: Attribute.Relation<
       'api::store-obstacle.store-obstacle',
       'oneToOne',
-      'api::store-layout.store-layout'
+      'api::store.store'
     >;
-    Points: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1098,6 +1181,46 @@ export interface ApiStoreObstacleStoreObstacle extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::store-obstacle.store-obstacle',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiStoreObstaclePointStoreObstaclePoint
+  extends Schema.CollectionType {
+  collectionName: 'store_obstacle_points';
+  info: {
+    singularName: 'store-obstacle-point';
+    pluralName: 'store-obstacle-points';
+    displayName: 'StoreObstaclePoint';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    store_obstacle: Attribute.Relation<
+      'api::store-obstacle-point.store-obstacle-point',
+      'oneToOne',
+      'api::store-obstacle.store-obstacle'
+    >;
+    coordinate: Attribute.Relation<
+      'api::store-obstacle-point.store-obstacle-point',
+      'oneToOne',
+      'api::coordinate.coordinate'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::store-obstacle-point.store-obstacle-point',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::store-obstacle-point.store-obstacle-point',
       'oneToOne',
       'admin::user'
     > &
@@ -1128,9 +1251,12 @@ declare module '@strapi/types' {
       'api::item.item': ApiItemItem;
       'api::store.store': ApiStoreStore;
       'api::store-basket-item.store-basket-item': ApiStoreBasketItemStoreBasketItem;
+      'api::store-checkout-point.store-checkout-point': ApiStoreCheckoutPointStoreCheckoutPoint;
+      'api::store-entrance-point.store-entrance-point': ApiStoreEntrancePointStoreEntrancePoint;
       'api::store-item.store-item': ApiStoreItemStoreItem;
-      'api::store-layout.store-layout': ApiStoreLayoutStoreLayout;
+      'api::store-layout-point.store-layout-point': ApiStoreLayoutPointStoreLayoutPoint;
       'api::store-obstacle.store-obstacle': ApiStoreObstacleStoreObstacle;
+      'api::store-obstacle-point.store-obstacle-point': ApiStoreObstaclePointStoreObstaclePoint;
     }
   }
 }

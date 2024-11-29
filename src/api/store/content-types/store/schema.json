@@ -24,12 +24,6 @@
     "latitude": {
       "type": "float",
       "required": true
-    },
-    "store_layout": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::store-layout.store-layout",
-      "inversedBy": "store"
     }
   }
 }

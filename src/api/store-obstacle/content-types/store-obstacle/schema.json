@@ -12,13 +12,10 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "store_layout": {
+    "store": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::store-layout.store-layout"
-    },
-    "Points": {
-      "type": "json"
+      "target": "api::store.store"
     }
   }
 }
