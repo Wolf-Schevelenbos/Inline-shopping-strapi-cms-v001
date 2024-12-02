@@ -1,7 +1,16 @@
 export default [
   "strapi::logger",
   "strapi::errors",
-  "strapi::security",
+  {
+    name: "strapi::security",
+    config: {
+      contentSecurityPolicy: {
+        directives: {
+          "connect-src": ["'self'", "https:", "ws:"],
+        },
+      },
+    },
+  },
   {
     name: "strapi::cors",
     config: {
