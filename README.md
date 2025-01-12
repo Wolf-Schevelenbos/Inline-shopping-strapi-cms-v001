@@ -1,4 +1,29 @@
-# 🚀 Getting started with Strapi
+# Strapi CMS inline-shopping
+
+As a CMS, Strapi provides a flexible and customizable platform for creating, editing, and managing content, while also providing a robust API for integrating with other applications and services.
+
+We use Strapi version 4.25.11.
+
+## Structure
+
+[This diagram](https://gitlab.ti.howest.be/ti/2024-2025/s5/ccett/projects/group-04/documentation/-/blob/main/Diagrams/Inline-shopping-mysql-overview-diagram.png?ref_type=heads) describes the way the data has been structured inside of this strapi project.
+
+Include 2 roles for users with the appropriate rights:
+
+- store owner: has rights regarding nearly everything (coordinate, item, store-item), except other users and baskets.
+- authenticated: has rights relating to only (their own) shopping baskets.
+
+## Getting started
+
+Ensure you have:
+
+- a mysql server running locally, named `inlineshoppingcms`
+- update/create the .env file and fill in the correct database info. Get the latest `.env` file from the development team.
+- all npm package of this project
+
+```
+npm i
+```
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
 
@@ -7,9 +32,7 @@ Strapi comes with a full featured [Command Line Interface](https://docs.strapi.i
 Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
 
 ```
-npm run develop
-# or
-yarn develop
+npm run strapi develop
 ```
 
 ### `start`
@@ -17,22 +40,32 @@ yarn develop
 Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
 
 ```
-npm run start
-# or
-yarn start
+npm run strapi start
 ```
 
 ### `build`
 
 Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
 
+The `master` branch will update the GitLab repository.
+
+The `main` branch will update the GitHub repository. With a webhook, this triggers auto-deployment. Ensure the correct web address in `config/middlewares.ts` and `config/server.ts`
+
 ```
-npm run build
-# or
-yarn build
+npm run strapi build
 ```
 
-## ⚙️ Deployment
+### Linking with Android/Flutter
+
+- Update/create the .env file and fill in the correct database info.
+- Make sure Strapi runs on `0.0.0.0`, double check this in `server.ts`.
+- Use branch [android-working-branch](https://gitlab.ti.howest.be/ti/2024-2025/s5/ccett/projects/group-04/code/cms/-/tree/android-working-branch?ref_type=heads)
+
+### Linking with web app
+
+- Avoid CORS issues by allowing the domain.
+
+## Deployment
 
 Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
 
@@ -50,12 +83,13 @@ yarn strapi deploy
 
 Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
 
-## ✨ Community
+## Functionality
 
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
+- Strapi headless CMS
+- uses some custom controllers on "android-working-branch"
+- has autodeployment on "master" branch
 
----
+There are 2 working branches due to lack of time to update the different apps to be able to merge these branches. With more time this would all be on the "master" branch.
 
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+- The [master](https://gitlab.ti.howest.be/ti/2024-2025/s5/ccett/projects/group-04/code/cms/-/tree/master?ref_type=heads) branch is used in the business rules microservice, firebase application and has auto-deployment.
+- The [android-working-branch](https://gitlab.ti.howest.be/ti/2024-2025/s5/ccett/projects/group-04/code/cms/-/tree/android-working-branch?ref_type=heads) is used to test the android app and other microservice.
